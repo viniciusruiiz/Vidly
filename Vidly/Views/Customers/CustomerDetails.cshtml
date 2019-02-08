@@ -1,0 +1,79 @@
+﻿@model vidly.ViewModels.CustomerDetailsClassViewModel
+@{
+    ViewBag.Title = "Cliente";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+<h2 style="margin-top:15px">Cliente: @Model.Name</h2>
+
+<dl class="dl-horizontal" style="margin-top:20px">
+    <dt>
+        @Html.DisplayNameFor(model => model.User.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.User.Email)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.CPF)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.CPF)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.DateOfBirth)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.DateOfBirth)
+    </dd>
+</dl>
+
+@if (Model.Movies != null)
+{
+    <h2 style="margin-top:20px">Filmes comprados:</h2>
+
+    <table class="table table-striped table-bordered" style="margin-top:15px" id="tabelaDeFilmes">
+
+        <thead style="font-weight:bold">
+            <tr>
+                <td>Filme</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var movie in Model.Movies)
+            {
+                <tr>
+                    <td>@Html.ActionLink(movie.Name, "MovieDetails/" + movie.Id, "Movies")</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <p>Esse cliente ainda não reservou nenhum filme</p>
+}
+
+    <p style="text-align:right">@Html.ActionLink("Voltar a lista de clientes", "Index", "Customers") | @Html.ActionLink("Trocar nível de acesso do usuário", "ChangeAcessLevel/" + Model.User.IdAccount, "Customers")</p>
+
+@*<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>*@
+@*<script>
+        $(document).ready(() => {
+            $('#tabelaDeFilmes').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrando _MENU_ filmes por página",
+                    "zeroRecords": "Nenhum filme encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum filme encontrado",
+                    "infoFiltered": "(de _MAX_ registros)"
+                }
+            });
+        });
+    </script>*@

@@ -1,0 +1,14 @@
+﻿@using Vidly.Repositorio;
+
+@{
+    ViewBag.Title = "Filmes";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+<h1 style="font-weight:bolder; text-align:center; color:red; margin-top:70px;">@ViewBag.Message</h1>
+<p style="font-weight:500; text-align:center; color:darkred;">@Html.ActionLink("(Clique aqui para ir a sua biblioteca de filmes)", "Library/" + UserRepositorio.GetUserLogged().Customer.Id, "Movies")</p>
+
+<br />
+<br />
+
+<h4 style="font-weight:200; text-align:right">@Html.ActionLink("Clique para voltar ao Catálogo", "Index", "Movies")</h4>

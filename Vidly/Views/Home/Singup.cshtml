@@ -1,0 +1,96 @@
+﻿@model Vidly.ViewModels.SingUpClassViewModel
+
+@{
+    ViewBag.Title = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Singup", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container">
+        <div class="form-group">
+            <div class="panel panel-default" style="margin-top:40px">
+                <div class="panel-heading">
+                    <div class="panel-title">Registre-se!</div>
+                </div>
+
+                <div style="padding-top:30px" class="panel-body">
+                    <div style="display:none" id="result" class="alert alert-danger col-sm-12">
+
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "E-mail", autofocus = true } })
+                        @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Senha", @type = "password" } })
+                        @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.EditorFor(model => model.Customer.Name, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Nome", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.Customer.Name, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        @Html.EditorFor(model => model.Customer.DateOfBirth, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Data de Nascimento( dd/mm/aaaa )" } })
+                        @Html.ValidationMessageFor(model => model.Customer.DateOfBirth, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
+                        @Html.EditorFor(model => model.Customer.CPF, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "CPF", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.Customer.CPF, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <p style="font-size:18px">Escolha o Plano</p>
+                        
+                        <div class="col-md-offset-2 col-md-15">
+
+                            <label for="Permission">Admin</label>
+                            @Html.RadioButtonFor(c => c.User.Permission.Id, 1)
+
+
+                            <label for="Permission">Standard</label>
+                            @Html.RadioButtonFor(c => c.User.Permission.Id, 2)
+
+
+                            <label for="Permission">Kid</label>
+                            @Html.RadioButtonFor(c => c.User.Permission.Id, 3)
+                        </div>
+                        @*@Html.ValidationMessageFor(c => c.Permission.Name, "Editar permissão", new { @class = "text-danger" })*@
+                    </div>
+
+                    <div style="margin-top:10px" class="form-group">
+
+                        <div class="col-sm-12 controls">
+                            <input type="submit" value="Registrar-se" class="btn primary btn-lg" />
+                        </div>
+
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+
+                        <p style="margin-left:18px;">Já tem uma conta? <b>@Html.ActionLink("Clique aqui para entrar no sistema!", "Login")</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

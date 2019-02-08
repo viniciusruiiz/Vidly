@@ -1,0 +1,53 @@
+﻿@model Vidly.ViewModels.AcessChangeViewModel
+
+@{
+    ViewBag.Title = "ChangeAcessLevel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mudar nível de acesso de @Model.User.Customer.Name</h2>
+<span>Seu nivel de acesso é de "@Model.Permission.Name"</span>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Níveis de acesso:</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.User.IdAccount)
+
+    <label for="Permission">Admin</label>
+    @Html.RadioButtonFor(c => c.Permission.Id, 1, new { @class = "col-md-offset-5 col-md-10" })
+
+    <br />
+
+    <label for="Permission">Standard</label>
+    @Html.RadioButtonFor(c => c.Permission.Id, 2, new { @class = "col-md-offset-5 col-md-10" })
+
+    <br />
+
+    <label for="Permission">Kid</label>
+    @Html.RadioButtonFor(c => c.Permission.Id, 3, new { @class = "col-md-offset-5 col-md-5" })
+    @*@Html.ValidationMessageFor(c => c.Permission.Name, "Editar permissão", new { @class = "text-danger" })*@
+
+    <br />
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" value="Salvar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div style="text-align:right">
+    @Html.ActionLink("Voltar a lista de clientes", "Index", "Customers")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,54 @@
+﻿@model vidly.Models.Movie
+@{
+    ViewBag.Title = "Adicionar Novo Filme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Adicionar novo filme</h1>
+@using (Html.BeginForm("AddMovie", "Movies", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>Coloque os dados do filme</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Genre, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Genre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Genre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rating, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rating, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Rating, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReleaseDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ReleaseDate, new { @class = "form-control", @id = "releaseDate" })
+            @Html.ValidationMessageFor(m => m.ReleaseDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Adicionar" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+    <div>
+        <p style="text-align:right">@Html.ActionLink("Voltar ao Catálogo", "Index", "Movies")</p>
+    </div>

@@ -1,0 +1,98 @@
+﻿@model vidly.ViewModels.MoviesClassViewModel
+
+@{
+    ViewBag.Title = "Filmes";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+<h1 style="margin-top:15px">Catálogo de Filmes</h1>
+
+@if (Model.Movies.Count == 0)
+{
+    <p style="margin-top:35px">Ainda não temos nenhum filme</p>
+}
+else
+{
+    if (HttpContext.Current.User.IsInRole("Admin"))
+    {
+        <table class="table table-striped table-bordered" style="margin-top:15px" id="Filmes">
+
+            <thead style="font-weight:bold">
+                <tr>
+                    <td>Filme</td>
+                    <td>Genero</td>
+                    <td>Classificação Indicativa</td>
+                    <td>Data de Lançamento</td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var movie in Model.Movies)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(movie.Name, "MovieDetails/" + movie.Id, "Movies")</td>
+                        <td>@movie.Genre</td>
+                        <td>@movie.Rating</td>
+                        <td>@movie.ReleaseDate.ToShortDateString()</td>
+                        <td>
+                            @Html.ActionLink("Editar", "EditMovie/" + movie.Id, "Movies") |
+                            @Html.ActionLink("Deletar", "DeleteMovie/" + movie.Id, "Movies")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+        <h4 style="text-align:right; margin-top:25px">@Html.ActionLink("Adicionar um novo Filme", "AddMovie", "Movies")</h4>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered" style="margin-top:15px" id="Filmes">
+
+            <thead style="font-weight:bold">
+                <tr>
+                    <td>Filme</td>
+                    <td>Genero</td>
+                    <td>Classificação Indicativa</td>
+                    <td>Data de Lançamento</td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var movie in Model.Movies)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(movie.Name, "MovieDetails/" + movie.Id, "Movies")</td>
+                        <td>@movie.Genre</td>
+                        <td>@movie.Rating</td>
+                        <td>@movie.ReleaseDate.ToShortDateString()</td>
+                        <td>
+                            @Html.ActionLink("Alugar Filme", "Index/" + movie.Id, "Rent")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+}
+
+@*<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $('#Filmes').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrando _MENU_ filmes por página",
+                    "zeroRecords": "Nenhum filme encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum filme encontrado",
+                    "infoFiltered": "(de _MAX_ registros)"
+                }
+            });
+
+        });
+    </script>*@

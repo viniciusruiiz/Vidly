@@ -1,0 +1,79 @@
+﻿@model vidly.ViewModels.MovieDetailsClassViewModel
+@{
+    ViewBag.Title = "Filme";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+<h2 style="margin-top:15px">Filme: @Model.Movie.Name</h2>
+
+<dl class="dl-horizontal" style="margin-top:20px">
+    <dt>
+        @Html.DisplayNameFor(model => model.Movie.Genre)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Movie.Genre)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Movie.Rating)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Movie.Rating)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Movie.ReleaseDate)
+    </dd>
+</dl>
+@if (Model.Customers == null)
+{
+    <p style="margin-top:15px">Ainda não temos nenhuma reserva deste filme</p>
+
+}
+else
+{
+    <h2 style="margin-top:20px">Clientes que adquiriram:</h2>
+
+    <table class="table table-striped table-bordered" style="margin-top:15px" id="tabelaDeClientes">
+
+        <thead style="font-weight:bold">
+            <tr>
+                <td>Cliente</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+                <tr>
+                    <td>@Html.ActionLink(customer.Name, "CustomerDetails/" + customer.Id, "Customers")</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <p style="text-align:right">@Html.ActionLink("Voltar ao Catálogo", "Index", "Movies")</p>
+}
+
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script>
+    //$(document).ready(() => {
+    //    $('#tabelaDeClientes').DataTable({
+    //        "language": {
+    //            "lengthMenu": "Mostrando _MENU_ clientes por página",
+    //            "zeroRecords": "Nenhum cliente encontrado",
+    //            "info": "Mostrando página _PAGE_ de _PAGES_",
+    //            "infoEmpty": "Nenhum cliente encontrado",
+    //            "infoFiltered": "(de _MAX_ registros)"
+    //        }
+    //    });
+    //});
+</script>

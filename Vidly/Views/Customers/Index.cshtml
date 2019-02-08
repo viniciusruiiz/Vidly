@@ -1,0 +1,63 @@
+﻿@model vidly.ViewModels.CustomersClassViewModel
+@{
+    ViewBag.Title = "Clientes";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+<h1 style="margin-top:15px">Lista de Clientes</h1>
+
+@if (Model.Customers.Count == 0)
+{
+    <p style="margin-top:35px">Ainda não temos nenhum cliente</p>
+}
+else
+{
+    <table class="table table-striped table-bordered" style="margin-top:15px" id="Clientes">
+
+        <thead style="font-weight:bold">
+            <tr>
+                <td>Nome</td>
+                <td>Permissão</td>
+                <td>Email</td>
+                <td>Idade</td>
+                <td>CPF</td>
+                <td>Qnt. Filmes</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+            <tr>
+                <td>
+                    @Html.ActionLink(customer.Name, "CustomerDetails/" + customer.Id, "Customers")
+                </td>
+                <td>@customer.User.Permission.Id</td>
+                <td>@customer.User.Email</td> 
+                <td>@customer.Age() anos</td>
+                <td>@customer.CPF</td>
+                <td>@customer.Movies.Count</td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+<p style="text-align:right; color:red; font-weight:bold;">@ViewBag.Message</p>
+
+@*<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(() => {
+        $('#Clientes').DataTable({
+            "language": {
+                "lengthMenu": "Mostrando _MENU_ clientes por página",
+                "zeroRecords": "Nenhum clente encontrado",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum cliente encontrado",
+                "infoFiltered": "(de _MAX_ registros)"
+            }
+        })
+    })
+</script>*@
