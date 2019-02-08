@@ -261,6 +261,7 @@
     <Content Include="Views\Customers\ChangeAcessLevel.cshtml" />
     <Content Include="Views\Rent\RentDenied.cshtml" />
     <Content Include="Views\Movies\Library.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

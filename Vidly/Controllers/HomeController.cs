@@ -14,16 +14,22 @@ namespace Vidly.Controllers
 {
     public class HomeController : Controller
     {
+        //GET: Home/Index
         public ActionResult Index()
         {
             return View();
         }
 
+        //GET: Home/Login
         public ActionResult Login()
         {
-            return View();
+            if(!Request.IsAuthenticated)
+                return View();
+
+            return RedirectToAction("Index", "Home");
         }
 
+        //POST: Home/Login
         [HttpPost]
         public ActionResult Login(User model)
         {
@@ -32,7 +38,7 @@ namespace Vidly.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Movies");
+            return RedirectToAction("Index", "Home");
         }
 
         //GET: Home/Logout
@@ -49,12 +55,14 @@ namespace Vidly.Controllers
         //GET: Home/Singup
         public ActionResult SingUp()
         {
-            return View();
+            if (!Request.IsAuthenticated)
+                return View();
+
+            return RedirectToAction("Index", "Home");
         }
 
         //POST: Home/Singup
         [HttpPost]
-        //public ActionResult SingUp(string _email, string _password, string _name, string _birthdate, string _cpf)
         public ActionResult SingUp(SingUpClassViewModel model)
         {
             using (ISession session = SessionFactory.OpenSession())
@@ -62,42 +70,6 @@ namespace Vidly.Controllers
                 using (ITransaction transaction = session.BeginTransaction())
                 {
                     var permission = session.Get<Permission>(model.User.Permission.Id);
-
-                    //var customer = new Customer
-                    //{
-                    //    Name = model.Customer.Name,
-                    //    DateOfBirth = model.Customer.DateOfBirth,
-                    //    CPF = model.Customer.CPF
-                    //};
-
-                    //session.Save(customer);
-
-                    //var user = new User
-                    //{
-                    //    Email = model.User.Email,
-                    //    Password = model.User.Password,
-                    //    Permission = permission
-                    //};
-
-                    //session.Save(user);
-
-                    //var userQuery = session.QueryOver<User>()
-                    //    .Where(c => c.Email == model.User.Email)
-                    //    .SingleOrDefault();
-
-                    //customer.User = userQuery;
-
-                    //session.Save(customer);
-
-                    //var customerQuery = session.QueryOver<Customer>()
-                    //    .Where(c => c.Name == model.Customer.Name && c.DateOfBirth == model.Customer.DateOfBirth)
-                    //    .SingleOrDefault();
-
-                    //user.Customer = customerQuery;
-
-                    //session.Save(user);
-
-                    //transaction.Commit();
 
                     var user = new User
                     {

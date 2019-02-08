@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Seus Filmes</h2>
+<h1 style="margin-top:15px">Seus Filmes</h1>
 
-<br />
-
-<table class="table">
+<table class="table table-striped table-bordered" style="margin-top:15px">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Movies[0].Name)

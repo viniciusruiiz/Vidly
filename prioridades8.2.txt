@@ -1,1 +1,3 @@
 -> aprender tipos de testes com NUnit
+-> *performance horrível* (arrumar banco, conexões, modelagem)
+-> tirar a sessão de alugados no perfil admin

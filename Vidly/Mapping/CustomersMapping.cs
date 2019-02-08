@@ -14,7 +14,7 @@ namespace vidly.Mapping
             Id(x => x.Id);
             Map(x => x.Name);
             Map(x => x.DateOfBirth);
-            Map(x => x.CPF);
+            Map(x => x.CPF).Unique();
             HasManyToMany(x => x.Movies)
                 .Not.LazyLoad()
                 .Table("CustomerMovie");

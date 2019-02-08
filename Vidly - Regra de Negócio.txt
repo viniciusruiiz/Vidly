@@ -2,10 +2,10 @@ VIDLY - Regras de negócio
 
 Aplicação (Funções)
 
--Cadastro e login de clientes
+-Cadastro e login de clientes --
 -Escolher os filmes para alugar --
--Pesquisa e paginação de Clientes (por Nome ou CPF) //somente para Administradores
--Pesquisa e paginação de Filmes (por Nome, Gênero, Faixa Etária, Data de Lançamento(Início e Fim), Disponibilidade) 
+-Pesquisa e paginação de Clientes (por Nome ou CPF) //somente para Administradores -
+-Pesquisa e paginação de Filmes (por Nome, Gênero, Faixa Etária, Data de Lançamento(Início e Fim), Disponibilidade) -
 -Insersão de filmes //somente para Administradores --
 -Bloquear Filmes com a faixa etária maior que 12 //Somente para usuários kids --
 -Filmes só podem ser alugados por 50 pessoas --
@@ -15,6 +15,7 @@ Aplicação (Funções)
 -Não habilitar a opção ''alugar'' para filmes já alugados
 -Mostrar filmes indisponíveis para alugar no front
 -Não podem existir usuários com mesmo email ou CPF
+-Opção de excuir conta
 
 Não Funcional
 

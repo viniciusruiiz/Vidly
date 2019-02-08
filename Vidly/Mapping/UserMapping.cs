@@ -13,7 +13,7 @@ namespace vidly.Mapping
         {
             Table("Users");
             Id(x => x.IdAccount).Column("Id");
-            Map(x => x.Email).Unique().Not.Nullable();
+            Map(x => x.Email).Unique().Not.Nullable().Unique();
             Map(x => x.Password).Not.Nullable();
             References(x => x.Customer)
                     .Cascade.All()

@@ -24,18 +24,16 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Inicial", "Index", "Home")</li>
+
+                        <li>@Html.ActionLink("Filmes", "Index", "Movies")</li>
+
                         if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Clientes", "Index", "Customers")</li>
                         }
-                        <li>@Html.ActionLink("Filmes", "Index", "Movies")</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
-                        <li>@Html.ActionLink("Registrar", "Singup", "Home")</li>
                     }
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
